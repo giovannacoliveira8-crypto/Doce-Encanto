@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doce Encanto | Confeitaria Artesanal</title>
+    <!-- Fontes Google: Playfair Display (Títulos) e Montserrat (Textos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --rosa-claro: #FDF2F4;
+            --rosa-medio: #FADADD;
+            --rosa-escuro: #E8B4BC;
+            --dourado: #C5A059;
+            --dourado-hover: #B08D48;
+            --texto-escuro: #4A3B3C;
+            --texto-suave: #7A6869;
+            --branco: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--rosa-claro);
+            color: var(--texto-escuro);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--rosa-medio);
+            box-shadow: 0 2px 15px rgba(197, 160, 89, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dourado);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--texto-escuro);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--texto-escuro);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dourado);
+        }
+
+        /* Banner Principal */
+        .hero {
+            height: 90vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(253, 242, 244, 0.82), rgba(250, 218, 221, 0.85)), 
+                        url('https://images.unsplash.com/photo-1558326567-98ae2405596b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero-subtitle {
+            color: var(--dourado);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--texto-escuro);
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--texto-suave);
+            margin-bottom: 2.2rem;
+        }
+
+        .btn-dourado {
+            display: inline-block;
+            background-color: var(--dourado);
+            color: var(--branco);
+            padding: 1rem 2.4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+            border: 2px solid var(--dourado);
+        }
+
+        .btn-dourado:hover {
+            background-color: var(--dourado-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--texto-escuro);
+            margin-bottom: 0.5rem;
+        }
+
+        .divisor-dourado {
+            width: 60px;
+            height: 2px;
+            background-color: var(--dourado);
+            margin: 0.8rem auto 1rem;
+        }
+
+        .section-header p {
+            color: var(--texto-suave);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cardápio / Variedades */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--branco);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--rosa-medio);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(197, 160, 89, 0.15);
+            border-color: var(--dourado);
+        }
+
+        .menu-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .menu-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--texto-escuro);
+        }
+
+        .menu-info p {
+            font-size: 0.9rem;
+            color: var(--texto-suave);
+            margin-bottom: 1.2rem;
+        }
+
+        .menu-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--rosa-medio);
+        }
+
+        .preco {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dourado);
+        }
+
+        .btn-pedir {
+            color: var(--texto-escuro);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .btn-pedir:hover {
+            color: var(--dourado);
+        }
+
+        /* Sobre Nós */
+        .sobre-wrapper {
+            background-color: var(--branco);
+            border-radius: 24px;
+            padding: 3.5rem;
+            border: 1px solid var(--rosa-medio);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .sobre-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 3px solid var(--rosa-medio);
+        }
+
+        .sobre-texto h2 {
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .sobre-texto p {
+            color: var(--texto-suave);
+            margin-bottom: 1.2rem;
+        }
+
+        .diferenciais {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .diferencial-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .diferencial-item i {
+            color: var(--dourado);
+            font-size: 1.2rem;
+        }
+
+        /* Fale Conosco */
+        .contato-box {
+            background: linear-gradient(135deg, var(--rosa-medio) 0%, var(--rosa-claro) 100%);
+            border: 1px solid var(--dourado);
+            border-radius: 24px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+        }
+
+        .contato-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .contato-item {
+            background: var(--branco);
+            padding: 1.8rem 2rem;
+            border-radius: 16px;
+            min-width: 250px;
+            border: 1px solid var(--rosa-medio);
+            text-decoration: none;
+            color: var(--texto-escuro);
+            transition: all 0.3s;
+        }
+
+        .contato-item:hover {
+            border-color: var(--dourado);
+            transform: translateY(-4px);
+        }
+
+        .contato-item i {
+            font-size: 2rem;
+            color: var(--dourado);
+            margin-bottom: 0.8rem;
+        }
+
+        .contato-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contato-item span {
+            font-size: 0.9rem;
+            color: var(--texto-suave);
+        }
+
+        /* Botão Flutuante WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--branco);
+            border-top: 1px solid var(--rosa-medio);
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--texto-suave);
+            font-size: 0.9rem;
+        }
+
+        footer .logo {
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Responsividade (Celulares) */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            nav ul {
+                gap: 1.2rem;
+            }
+            .hero {
+                margin-top: 100px;
+                height: auto;
+                padding: 5rem 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .sobre-wrapper {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+            .sobre-img {
+                height: 280px;
+            }
+            .diferenciais {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Doce <span>Encanto</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#cardapio">Cardápio</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#contato">Fale Conosco</a></li>
+                      <li><a href="htmlChatEmpresa.html">chat</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Confeitaria Artesanal</span>
+            <h1>Transformando momentos especiais em doces memórias</h1>
+            <p>Produção artesanal com ingredientes selecionados, chocolate nobre e aquele toque de carinho que encanta em cada mordida.</p>
+            <a href="#cardapio" class="btn-dourado">Ver Cardápio</a>
+        </div>
+    </section>
+
+    <!-- Cardápio / Variedades de Doces -->
+    <section id="cardapio">
+        <div class="section-header">
+            <h2>Nossas Delícias</h2>
+            <div class="divisor-dourado"></div>
+            <p>Escolha seus favoritos e faça sua encomenda diretamente pelo nosso WhatsApp.</p>
+        </div>
+
+        <div class="menu-grid">
+            <!-- Produto 1 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=600&q=80" alt="Brigadeiros Gourmet" class="menu-img">
+                <div class="menu-info">
+                    <div>
+                        <h3>Brigadeiros Gourmet</h3>
+                        <p>Sabores Belga ao leite, Ninho com Nutella, Pistache, Churros e Ferrero. Feitos com chocolate nobre.</p>
+                    </div>
+                    <div class="menu-footer">
+                        <span class="preco">R$ 4,50 / un</span>
+                        <!-- SUBSTITUA O NÚMERO ABAIXO (5511999999999) -->
+                        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de encomendar Brigadeiros Gourmet." target="_blank" class="btn-pedir">
+                            Encomendar <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Bolos Decorados" class="menu-img">
+                <div class="menu-info">
+                    <div>
+                        <h3>Bolos de Festa</h3>
+                        <p>Massa fofinha e úmida com recheios artesanais de frutas vermelhas, brigadeiro belga ou quatro leites.</p>
+                    </div>
+                    <div class="menu-footer">
+                        <span class="preco">R$ 95,00 / kg</span>
+                        <!-- SUBSTITUA O NÚMERO ABAIXO (5511999999999) -->
+                        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de fazer um orçamento de Bolo de Festa." target="_blank" class="btn-pedir">
+                            Encomendar <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Doces Finos" class="menu-img">
+                <div class="menu-info">
+                    <div>
+                        <h3>Doces Finos para Eventos</h3>
+                        <p>Camafeu de nozes, bombom aberto de morango, copinho de physalis e trufas douradas para casamentos e festas.</p>
+                    </div>
+                    <div class="menu-footer">
+                        <span class="preco">R$ 6,50 / un</span>
+                        <!-- SUBSTITUA O NÚMERO ABAIXO (5511999999999) -->
+                        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre os Doces Finos." target="_blank" class="btn-pedir">
+                            Encomendar <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 4 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=600&q=80" alt="Sobremesas no Pote" class="menu-img">
+                <div class="menu-info">
+                    <div>
+                        <h3>Sobremesas e Tortas</h3>
+                        <p>Banoffee, torta de limão siciliano, bolo no pote gourmet e brownie recheado para adoçar o seu dia.</p>
+                    </div>
+                    <div class="menu-footer">
+                        <span class="preco">A partir de R$ 18,00</span>
+                        <!-- SUBSTITUA O NÚMERO ABAIXO (5511999999999) -->
+                        <a href="https://wa.me/5511999999999?text=Olá! Quero ver as opções de Sobremesas e Tortas." target="_blank" class="btn-pedir">
+                            Encomendar <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section id="sobre">
+        <div class="sobre-wrapper">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" alt="Confeitaria Doce Encanto" class="sobre-img">
+            <div class="sobre-texto">
+                <span class="hero-subtitle" style="margin-bottom: 0.5rem;">Nossa História</span>
+                <h2>Sobre a Doce Encanto</h2>
+                <div class="divisor-dourado" style="margin: 0.8rem 0 1.2rem;"></div>
+                <p>A <strong>Doce Encanto</strong> nasceu da paixão por transformar ingredientes simples em verdadeiras joias da confeitaria. Cada receita é preparada artesanalmente, respeitando o tempo de cada preparo e priorizando o sabor autêntico.</p>
+                <p>Seja para celebrar um aniversário, um casamento ou simplesmente adoçar uma tarde especial, nossa missão é levar afeto, beleza e sofisticação para a sua mesa.</p>
+                
+                <div class="diferenciais">
+                    <div class="diferencial-item">
+                        <i class="fas fa-award"></i>
+                        <span>Ingredientes Nobres</span>
+                    </div>
+                    <div class="diferencial-item">
+                        <i class="fas fa-heart"></i>
+                        <span>100% Artesanal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fale Conosco -->
+    <section id="contato">
+        <div class="contato-box">
+            <h2>Fale Conosco</h2>
+            <div class="divisor-dourado"></div>
+            <p>Faça sua encomenda ou tire suas dúvidas. Atendimento rápido e personalizado!</p>
+
+            <div class="contato-cards">
+                <!-- Link WhatsApp (SUBSTITUA O NÚMERO) -->
+                <a href="https://wa.me/5511999999999?text=Olá! Vim pelo site da Doce Encanto e gostaria de fazer um pedido." target="_blank" class="contato-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <span>(11) 99999-9999</span>
+                </a>
+
+                <!-- Link Ligação Direta (SUBSTITUA O NÚMERO) -->
+                <a href="tel:+5511999999999" class="contato-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Telefone</h4>
+                    <span>(11) 99999-9999</span>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com" target="_blank" class="contato-item">
+                    <i class="fab fa-instagram"></i>
+                    <h4>Instagram</h4>
+                    <span>@doceencanto.oficial</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão Flutuante WhatsApp (SUBSTITUA O NÚMERO) -->
+    <a href="https://wa.me/5511999999999?text=Olá! Gostaria de fazer uma encomenda na Doce Encanto." target="_blank" class="whatsapp-float" title="Fale conosco no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Rodapé -->
+    <footer>
+        <a href="#" class="logo">Doce <span>Encanto</span></a>
+        <p>Confeitaria Artesanal • Encomendas para festas, eventos e presentes.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">&copy; 2026 Doce Encanto. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
